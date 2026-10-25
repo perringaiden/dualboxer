@@ -1,0 +1,12 @@
+## Interface: 120105
+## Title: Dual Boxer
+## Version: 0.0.1
+## DefaultState: Enabled
+## Author: Perringaiden
+## SavedVariablesPerCharacter: DualBoxer_Settings
+DualBoxer_Core.lua
+DualBoxer_Debug.lua
+DualBoxer_Party.lua
+DualBoxer_Buttons.lua
+DualBoxer_Spells_Standard.lua
+Utilities.lua
