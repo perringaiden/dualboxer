@@ -58,3 +58,12 @@ function Utilities:TableToString(tableObj)
     result = result .. "}"
     return result
 end
+
+function Utilities:CallFunctionIfExists(func, fallback, ...)
+    if func ~= nil then
+        return func(...)
+    end
+    if fallback ~= nil then
+        return fallback(...)
+    end
+end

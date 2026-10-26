@@ -488,3 +488,12 @@ function DualBoxer:ButtonDetails_PetLight(masterUnit, playerClassID)
         end
     end
 end
+
+function DualBoxer:ButtonDetails_Follow(masterUnit, classID)
+    return {
+        ButtonFrameName = "Follow",
+        Type = "macro",
+        MacroText = "/follow " .. masterUnit,
+        Texture = DualBoxer:ClassIDIcon(classID)
+    }
+end

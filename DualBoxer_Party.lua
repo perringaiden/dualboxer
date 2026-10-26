@@ -33,13 +33,15 @@ end
 
 function DualBoxer:UpdateLootMethod()
     if UnitIsGroupLeader("player", 1) then
-        local lootmethod = C_PartyInfo.GetLootMethod()
+        local lootMethod = C_PartyInfo.GetLootMethod()
 
-        if lootmethod ~= "freeforall" then
+        if lootmethod ~= 0 then
             if DualBoxer:FindApprovedMemberUnit() ~= nil then
-                C_PartyInfo.SetLootMethod("freeforall")
+                C_PartyInfo.SetLootMethod(0)
             end
         end
+    else
+        print("Unable to determine loot method.")
     end
 end
 

@@ -1,11 +1,12 @@
-## Interface: 40400
+## Interface: 11509
 ## Title: Dual Boxer
 ## Version: 0.0.1
 ## DefaultState: Enabled
 ## Author: Perringaiden
 ## SavedVariablesPerCharacter: DualBoxer_Settings
 DualBoxer_Core.lua
+DualBoxer_Debug.lua
 DualBoxer_Party.lua
 DualBoxer_Buttons.lua
-DualBoxer_Spells.lua
+DualBoxer_Spells_Classic.lua
 Utilities.lua

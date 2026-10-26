@@ -19,6 +19,10 @@ function DualBoxer.CommandHandler(msg, editBox)
         DualBoxer_Settings.Follower = true
     elseif strlower(command) == "leader" then
         DualBoxer_Settings.Follower = false
+    elseif strlower(command) == "uset9" then
+        DualBoxer_Settings.UseT9 = true
+
+        DualBoxer:UpdateUI()
     elseif strlower(command) == "focus" then
         if UnitExists("focus") then
             DualBoxer.Focus = true
@@ -76,6 +80,7 @@ function DualBoxer.OnEvent(self, event, sender, ...)
             print("Player Entering World")
             DualBoxer:EnsureSettings()
             DualBoxer:PrepareFrames()
+            DualBoxer:UpdateLootMethod()
 
             DualBoxer:UpdateUI()
         elseif event == "PARTY_INVITE_REQUEST" then
@@ -86,9 +91,11 @@ function DualBoxer.OnEvent(self, event, sender, ...)
                 StaticPopup_Hide("PARTY_INVITE")
             end
         elseif event == "GROUP_ROSTER_UPDATE" then
+            DualBoxer.DebugPrint("Group Roster Update")
             DualBoxer:UpdateLootMethod()
             DualBoxer:UpdateUI()
         elseif event == "QUEST_ACCEPT_CONFIRM" then
+            DualBoxer.DebugPrint("Quest Accept Confirm:" .. sender)
             if Utilities:SetContains(DualBoxer_Settings.ApprovedCharacters, sender) then
                 ConfirmAcceptQuest()
                 StaticPopup_Hide("QUEST_ACCEPT")
@@ -113,6 +120,10 @@ function DualBoxer.EnsureSettings()
 
     if DualBoxer_Settings.Follower == nil then
         DualBoxer_Settings.Follower = false
+    end
+
+    if DualBoxer_Settings.UseT9 == nil then
+        DualBoxer_Settings.UseT9 = false
     end
 end
 

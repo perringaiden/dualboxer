@@ -1,4 +1,4 @@
-DualBoxer.ButtonFrameList = {
+DualBoxer.ButtonFrameList_T9 = {
     {Key = "FastRegen", Name = "DBHButton_FastRegen", Row = 0, Column = 1, Binding = "H"},
     {Key = "Assist", Name = "DBHButton_Assist", Row = 0, Column = 2, Binding = "V"},
     {Key = "RegularHeal", Name = "DBHButton_Regular", Row = 1, Column = 0, Binding = "K"},
@@ -23,16 +23,34 @@ DualBoxer.ButtonFrameList = {
     {Key = "ResetFocus", Name = "DBHButton_ResetFocus", Row = 4, Column = 4, Binding = "O"}
 }
 
+DualBoxer.ButtonFrameList_KeyPad = {
+    {Key = "RegularHeal", Name = "DBHButton_Regular", Row = 1, Column = 0, Binding = "NUMPAD1"},
+    {Key = "PrimaryHeal", Name = "DBHButton_Primary", Row = 1, Column = 1, Binding = "NUMPAD2"},
+    {Key = "Assist", Name = "DBHButton_Assist", Row = 0, Column = 2, Binding = "NUMPADDECIMAL"},
+    {Key = "Follow", Name = "DBHButton_Follow", Row = 1, Column = 3, Binding = "ENTER"},
+    {Key = "ResetFocus", Name = "DBHButton_ResetFocus", Row = 3, Column = 4, Binding = "NUMPADPLUS"},
+    {Key = "Buff", Name = "DBHButton_Buff", Row = 2, Column = 3, Binding = "NUMPAD6"}
+}
+
 function DualBoxer:PrepareFrames()
     DualBoxer.ButtonFrameParent = BuildBaseFrame()
 
     DualBoxer.ButtonFrames = {}
     DualBoxer.ButtonTextures = {}
 
-    for i, frame in ipairs(DualBoxer.ButtonFrameList) do
-        if frame ~= nil then
-            DualBoxer.ButtonFrames[frame.Key] = BuildFrame(frame.Name, frame.Row, frame.Column)
-            DualBoxer:BuildFrameTexture(DualBoxer.ButtonFrames[frame.Key], frame.Key, frame.Name)
+    if DualBoxer_Settings.UseT9 then
+        for i, frame in ipairs(DualBoxer.ButtonFrameList_T9) do
+            if frame ~= nil then
+                DualBoxer.ButtonFrames[frame.Key] = BuildFrame(frame.Name, frame.Row, frame.Column)
+                DualBoxer:BuildFrameTexture(DualBoxer.ButtonFrames[frame.Key], frame.Key, frame.Name)
+            end
+        end
+    else
+        for i, frame in ipairs(DualBoxer.ButtonFrameList_KeyPad) do
+            if frame ~= nil then
+                DualBoxer.ButtonFrames[frame.Key] = BuildFrame(frame.Name, frame.Row, frame.Column)
+                DualBoxer:BuildFrameTexture(DualBoxer.ButtonFrames[frame.Key], frame.Key, frame.Name)
+            end
         end
     end
 
@@ -130,17 +148,23 @@ end
 function DualBoxer:SetBindings()
     DualBoxer:ClearBindings()
 
-    for i, value in ipairs(DualBoxer.ButtonFrameList) do
-        SetOverrideBindingClick(DualBoxer.BindingFrame, false, value.Binding, value.Name, "LeftButton")
-    end
+    if not DualBoxer_Settings.UseT9 then
+        for i, value in ipairs(DualBoxer.ButtonFrameList_KeyPad) do
+            SetOverrideBindingClick(DualBoxer.BindingFrame, false, value.Binding, value.Name, "LeftButton")
+        end
+    else
+        for i, value in ipairs(DualBoxer.ButtonFrameList_T9) do
+            SetOverrideBindingClick(DualBoxer.BindingFrame, false, value.Binding, value.Name, "LeftButton")
+        end
 
-    SetOverrideBinding(DualBoxer.BindingFrame, false, "NUMPADMINUS", "JUMP")
-    SetOverrideBinding(DualBoxer.BindingFrame, false, "F1", "OPENALLBAGS")
-    SetOverrideBinding(DualBoxer.BindingFrame, false, "F2", "TOGGLEQUESTLOG")
-    SetOverrideBinding(DualBoxer.BindingFrame, false, "F3", "TOGGLECHARACTER0")
-    SetOverrideBinding(DualBoxer.BindingFrame, false, "F4", "TOGGLEPROFESSIONBOOK")
-    SetOverrideBinding(DualBoxer.BindingFrame, false, "F5", "TOGGLECHARACTER2")
-    SetOverrideBinding(DualBoxer.BindingFrame, false, "F6", "TOGGLETALENTS")
+        SetOverrideBinding(DualBoxer.BindingFrame, false, "NUMPADMINUS", "JUMP")
+        SetOverrideBinding(DualBoxer.BindingFrame, false, "F1", "OPENALLBAGS")
+        SetOverrideBinding(DualBoxer.BindingFrame, false, "F2", "TOGGLEQUESTLOG")
+        SetOverrideBinding(DualBoxer.BindingFrame, false, "F3", "TOGGLECHARACTER0")
+        SetOverrideBinding(DualBoxer.BindingFrame, false, "F4", "TOGGLEPROFESSIONBOOK")
+        SetOverrideBinding(DualBoxer.BindingFrame, false, "F5", "TOGGLECHARACTER2")
+        SetOverrideBinding(DualBoxer.BindingFrame, false, "F6", "TOGGLETALENTS")
+    end
 end
 
 function DualBoxer:ClearBindings()
@@ -207,43 +231,35 @@ end
 function DualBoxer:GenerateSpellList(playerClassID, playerLevel, masterUnit, masterLevel, masterClassID)
     local rc = {}
 
-    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_FastRegen(masterUnit, playerClassID, playerLevel)) -- H
     Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_Assist(masterUnit, playerClassID, playerLevel)) -- V
     Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_RegularHeal(masterUnit, playerClassID, playerLevel)) -- K
-    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_PrimaryHeal(masterUnit, playerClassID, playerLevel)) -- N
-    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_Regen(masterUnit, playerClassID, playerLevel)) -- M
-    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_LightDirect(masterUnit, playerClassID, playerLevel)) -- B
     Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_Follow(masterUnit, masterClassID)) -- .
-    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_PartyHeal(masterUnit, playerClassID, playerLevel)) -- Z
-    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_ClearDebuff(masterUnit, playerClassID, playerLevel)) -- X
-    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_BuffTwo(masterUnit, playerClassID, playerLevel)) -- C
+    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_PrimaryHeal(masterUnit, playerClassID, playerLevel)) -- N
     Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_Buff(masterUnit, playerClassID, playerLevel)) -- T
-    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_Mount(playerClassID)) -- ,
-    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_SelfRegularHeal(playerClassID, playerLevel)) -- A
-    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_SelfPrimaryHeal(playerClassID, playerLevel)) -- S
-    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_SelfRegen(playerClassID, playerLevel)) -- D
-    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_SelfLight(playerClassID, playerLevel)) -- F
-    Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_Innervate(masterUnit, playerClassID, playerLevel)) -- G
 
-    if DualBoxer:ClassIDsWithPets(masterClassID) then
-        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_PetRegular(masterUnit, playerClassID, playerLevel)) -- Q
-        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_PetHeal(masterUnit, playerClassID, playerLevel)) -- W
-        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_PetRegen(masterUnit, playerClassID, playerLevel)) -- E
-        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_PetLight(masterUnit, playerClassID, playerLevel)) -- R
+    if DualBoxer_Settings.UseT9 then
+        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_FastRegen(masterUnit, playerClassID, playerLevel)) -- H
+        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_Regen(masterUnit, playerClassID, playerLevel)) -- M
+        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_LightDirect(masterUnit, playerClassID, playerLevel)) -- B
+        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_PartyHeal(masterUnit, playerClassID, playerLevel)) -- Z
+        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_ClearDebuff(masterUnit, playerClassID, playerLevel)) -- X
+        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_BuffTwo(masterUnit, playerClassID, playerLevel)) -- C
+        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_Mount(playerClassID)) -- ,
+        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_SelfRegularHeal(playerClassID, playerLevel)) -- A
+        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_SelfPrimaryHeal(playerClassID, playerLevel)) -- S
+        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_SelfRegen(playerClassID, playerLevel)) -- D
+        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_SelfLight(playerClassID, playerLevel)) -- F
+        Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_Innervate(masterUnit, playerClassID, playerLevel)) -- G
+
+        if DualBoxer:ClassIDsWithPets(masterClassID) then
+            Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_PetRegular(masterUnit, playerClassID, playerLevel)) -- Q
+            Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_PetHeal(masterUnit, playerClassID, playerLevel)) -- W
+            Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_PetRegen(masterUnit, playerClassID, playerLevel)) -- E
+            Utilities:InsertInTable(rc, DualBoxer:ButtonDetails_PetLight(masterUnit, playerClassID, playerLevel)) -- R
+        end
     end
-
     -- Update UI -- O
-
     return rc
-end
-
-function DualBoxer:ButtonDetails_Follow(masterUnit, classID)
-    return {
-        ButtonFrameName = "Follow",
-        Type = "macro",
-        MacroText = "/follow " .. masterUnit,
-        Texture = DualBoxer:ClassIDIcon(classID)
-    }
 end
 
 function DualBoxer:ButtonDetails_ResetFocus(masterUnit, masterUnitClassID)
