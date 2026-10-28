@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: create-global
 DualBoxer = {}
 
 SLASH_DBRCMD1, SLASH_DBRCMD2 = "/dbr", "/dualboxer"
@@ -14,13 +15,15 @@ function DualBoxer.CommandHandler(msg, editBox)
     elseif strlower(command) == "addinviter" then
         DualBoxer:AddInviter(rest)
     elseif strlower(command) == "inviters" then
+        -- Unknown why this triggers.
+        ---@diagnostic disable-next-line: missing-parameter
         DualBoxer.ListInviters()
     elseif strlower(command) == "follower" then
         DualBoxer_Settings.Follower = true
     elseif strlower(command) == "leader" then
         DualBoxer_Settings.Follower = false
     elseif strlower(command) == "uset9" then
-        DualBoxer_Settings.UseT9 = true
+        DualBoxer_Settings.UseT9 = not DualBoxer_Settings.UseT9
 
         DualBoxer:UpdateUI()
     elseif strlower(command) == "focus" then
@@ -86,7 +89,7 @@ function DualBoxer.OnEvent(self, event, sender, ...)
         elseif event == "PARTY_INVITE_REQUEST" then
             local acceptInvite = false
 
-            if Utilities:SetContains(DualBoxer_Settings.ApprovedCharacters, sender) then
+            if Wolf_Utilities:SetContains(DualBoxer_Settings.ApprovedCharacters, sender) then
                 AcceptGroup()
                 StaticPopup_Hide("PARTY_INVITE")
             end
@@ -96,7 +99,7 @@ function DualBoxer.OnEvent(self, event, sender, ...)
             DualBoxer:UpdateUI()
         elseif event == "QUEST_ACCEPT_CONFIRM" then
             DualBoxer.DebugPrint("Quest Accept Confirm:" .. sender)
-            if Utilities:SetContains(DualBoxer_Settings.ApprovedCharacters, sender) then
+            if Wolf_Utilities:SetContains(DualBoxer_Settings.ApprovedCharacters, sender) then
                 ConfirmAcceptQuest()
                 StaticPopup_Hide("QUEST_ACCEPT")
             end
