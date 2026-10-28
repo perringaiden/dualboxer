@@ -9,6 +9,8 @@ function DualBoxer:AddInviter(rest)
     end
 end
 
+--- Lists the inviters in the approved list.
+--- @return nil
 function DualBoxer:ListInviters()
     print("Auto-Accept Invite From:")
     for index, value in ipairs(DualBoxer_Settings.ApprovedCharacters) do
@@ -64,21 +66,21 @@ end
 function DualBoxer:ClassIDIcon(classID)
     if classID == nil then
         return nil
-    elseif classID == 1 then -- Warrior
+    elseif classID == 1 then  -- Warrior
         return 626008
-    elseif classID == 2 then -- Paladin
+    elseif classID == 2 then  -- Paladin
         return 626003
-    elseif classID == 3 then -- Hunter
+    elseif classID == 3 then  -- Hunter
         return 626000
-    elseif classID == 4 then -- Rogue
+    elseif classID == 4 then  -- Rogue
         return 626005
-    elseif classID == 5 then -- Priest
+    elseif classID == 5 then  -- Priest
         return 626004
-    elseif classID == 7 then -- Shaman
+    elseif classID == 7 then  -- Shaman
         return 626006
-    elseif classID == 8 then -- Mage
+    elseif classID == 8 then  -- Mage
         return 626001
-    elseif classID == 9 then -- Warlock
+    elseif classID == 9 then  -- Warlock
         return 626007
     elseif classID == 11 then -- Druid
         return 625999
@@ -88,7 +90,7 @@ function DualBoxer:ClassIDIcon(classID)
 end
 
 function DualBoxer:ClassIDsWithPets(classID)
-    --[[ 
+    --[[
 1	Warrior	WARRIOR	
 2	Paladin	PALADIN	
 3	Hunter	HUNTER	

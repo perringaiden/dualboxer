@@ -132,7 +132,7 @@ function DualBoxer:ButtonDetails_PetRegularHeal(masterUnit, playerClassID)
 
 end
 
-function DualBoxer:ButtonDetails_PetHeal(masterUnit, playerClassID)
+function DualBoxer:ButtonDetails_PetPrimaryHeal(masterUnit, playerClassID)
 
 end
 

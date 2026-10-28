@@ -1,4 +1,4 @@
---[[ 
+--[[
 1	Warrior	WARRIOR	
 2	Paladin	PALADIN	
 3	Hunter	HUNTER	
@@ -440,7 +440,7 @@ function DualBoxer:ButtonDetails_PetRegularHeal(masterUnit, playerClassID)
     end
 end
 
-function DualBoxer:ButtonDetails_PetHeal(masterUnit, playerClassID)
+function DualBoxer:ButtonDetails_PetPrimaryHeal(masterUnit, playerClassID)
     if playerClassID == 11 then
         if DualBoxer.IsClassic then
             return {
@@ -471,18 +471,18 @@ function DualBoxer:ButtonDetails_PetRegen(masterUnit, playerClassID)
     end
 end
 
-function DualBoxer:ButtonDetails_PetLight(masterUnit, playerClassID)
+function DualBoxer:ButtonDetails_PetLightHeal(masterUnit, playerClassID)
     if playerClassID == 11 then
         if DualBoxer.IsClassic then
             return {
-                ButtonFrameName = "PetLight",
+                ButtonFrameName = "PetLightHeal",
                 Type = "spell",
                 Spell = "Nourish",
                 Unit = masterUnit .. "pet"
             }
         else
             return {
-                ButtonFrameName = "PetLight",
+                ButtonFrameName = "PetLightHeal",
                 Type = "spell",
                 Spell = "Regrowth",
                 Unit = masterUnit .. "pet"

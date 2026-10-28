@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: create-global
 Wolf_Utilities = {}
 
 -- SetContains
