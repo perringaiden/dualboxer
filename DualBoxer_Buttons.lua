@@ -1,37 +1,89 @@
+DualBoxer.ButtonFrameList = {
+    { Key = "FastRegen",       Name = "DBHButton_FastRegen" },
+    { Key = "Assist",          Name = "DBHButton_Assist" },
+    { Key = "RegularHeal",     Name = "DBHButton_Regular" },
+    { Key = "PrimaryHeal",     Name = "DBHButton_Primary" },
+    { Key = "Regen",           Name = "DBHButton_Regen" },
+    { Key = "LightDirect",     Name = "DBHButton_LightDirect" },
+    { Key = "Follow",          Name = "DBHButton_Follow" },
+    { Key = "PartyHeal",       Name = "DBHButton_PartyHeal" },
+    { Key = "ClearDebuff",     Name = "DBHButton_ClearDebuff" },
+    { Key = "BuffTwo",         Name = "DBHButton_BuffTwo" },
+    { Key = "Buff",            Name = "DBHButton_Buff" },
+    { Key = "Mount",           Name = "DBHButton_Mount" },
+    { Key = "SelfRegularHeal", Name = "DBHButton_SelfRegular" },
+    { Key = "SelfPrimaryHeal", Name = "DBHButton_SelfPrimary" },
+    { Key = "SelfRegen",       Name = "DBHButton_SelfRegen" },
+    { Key = "SelfLight",       Name = "DBHButton_SelfLight" },
+    { Key = "ManaSpecial",     Name = "DBHButton_ManaSpecial" },
+    { Key = "PetRegularHeal",  Name = "DBHButton_PetRegular" },
+    { Key = "PetPrimaryHeal",  Name = "DBHButton_PetPrimary" },
+    { Key = "PetRegen",        Name = "DBHButton_PetRegen" },
+    { Key = "PetLightHeal",    Name = "DBHButton_PetLight" },
+    { Key = "ResetFocus",      Name = "DBHButton_ResetFocus" }
+
+}
+
+DualBoxer.ButtonFrameNames = {
+    FastRegen = "DBHButton_FastRegen",
+    Assist = "DBHButton_Assist",
+    RegularHeal = "DBHButton_Regular",
+    PrimaryHeal = "DBHButton_Primary",
+    Regen = "DBHButton_Regen",
+    LightDirect = "DBHButton_LightDirect",
+    Follow = "DBHButton_Follow",
+    PartyHeal = "DBHButton_PartyHeal",
+    ClearDebuff = "DBHButton_ClearDebuff",
+    BuffTwo = "DBHButton_BuffTwo",
+    Buff = "DBHButton_Buff",
+    Mount = "DBHButton_Mount",
+    SelfRegularHeal = "DBHButton_SelfRegular",
+    SelfPrimaryHeal = "DBHButton_SelfPrimary",
+    SelfRegen = "DBHButton_SelfRegen",
+    SelfLight = "DBHButton_SelfLight",
+    ManaSpecial = "DBHButton_ManaSpecial",
+    PetRegularHeal = "DBHButton_PetRegular",
+    PetPrimaryHeal = "DBHButton_PetPrimary",
+    PetRegen = "DBHButton_PetRegen",
+    PetLightHeal = "DBHButton_PetLight",
+    ResetFocus = "DBHButton_ResetFocus"
+}
+
+
 DualBoxer.ButtonFrameList_T9 = {
-    { Key = "FastRegen",       Name = "DBHButton_FastRegen",   Row = 0, Column = 1, Binding = "H" },
-    { Key = "Assist",          Name = "DBHButton_Assist",      Row = 0, Column = 2, Binding = "V" },
-    { Key = "RegularHeal",     Name = "DBHButton_Regular",     Row = 1, Column = 0, Binding = "K" },
-    { Key = "PrimaryHeal",     Name = "DBHButton_Primary",     Row = 1, Column = 1, Binding = "N" },
-    { Key = "Regen",           Name = "DBHButton_Regen",       Row = 1, Column = 2, Binding = "M" },
-    { Key = "LightDirect",     Name = "DBHButton_LightDirect", Row = 1, Column = 3, Binding = "B" },
-    { Key = "Follow",          Name = "DBHButton_Follow",      Row = 1, Column = 4, Binding = "." },
-    { Key = "PartyHeal",       Name = "DBHButton_PartyHeal",   Row = 2, Column = 0, Binding = "Z" },
-    { Key = "ClearDebuff",     Name = "DBHButton_ClearDebuff", Row = 2, Column = 1, Binding = "X" },
-    { Key = "BuffTwo",         Name = "DBHButton_BuffTwo",     Row = 2, Column = 2, Binding = "C" },
-    { Key = "Buff",            Name = "DBHButton_Buff",        Row = 2, Column = 3, Binding = "T" },
-    { Key = "Mount",           Name = "DBHButton_Mount",       Row = 2, Column = 4, Binding = "," },
-    { Key = "SelfRegularHeal", Name = "DBHButton_SelfRegular", Row = 3, Column = 0, Binding = "A" },
-    { Key = "SelfPrimaryHeal", Name = "DBHButton_SelfPrimary", Row = 3, Column = 1, Binding = "S" },
-    { Key = "SelfRegen",       Name = "DBHButton_SelfRegen",   Row = 3, Column = 2, Binding = "D" },
-    { Key = "SelfLight",       Name = "DBHButton_SelfLight",   Row = 3, Column = 3, Binding = "F" },
-    { Key = "ManaSpecial",     Name = "DBHButton_ManaSpecial", Row = 3, Column = 4, Binding = "G" },
-    { Key = "PetRegularHeal",  Name = "DBHButton_PetRegular",  Row = 4, Column = 0, Binding = "Q" },
-    { Key = "PetPrimaryHeal",  Name = "DBHButton_PetPrimary",  Row = 4, Column = 1, Binding = "W" },
-    { Key = "PetRegen",        Name = "DBHButton_PetRegen",    Row = 4, Column = 2, Binding = "E" },
-    { Key = "PetLightHeal",    Name = "DBHButton_PetLight",    Row = 4, Column = 3, Binding = "R" },
-    { Key = "ResetFocus",      Name = "DBHButton_ResetFocus",  Row = 4, Column = 4, Binding = "O" }
+    { Key = "FastRegen",       Row = 0, Column = 1, Binding = "H" },
+    { Key = "Assist",          Row = 0, Column = 2, Binding = "V" },
+    { Key = "RegularHeal",     Row = 1, Column = 0, Binding = "K" },
+    { Key = "PrimaryHeal",     Row = 1, Column = 1, Binding = "N" },
+    { Key = "Regen",           Row = 1, Column = 2, Binding = "M" },
+    { Key = "LightDirect",     Row = 1, Column = 3, Binding = "B" },
+    { Key = "Follow",          Row = 1, Column = 4, Binding = "." },
+    { Key = "PartyHeal",       Row = 2, Column = 0, Binding = "Z" },
+    { Key = "ClearDebuff",     Row = 2, Column = 1, Binding = "X" },
+    { Key = "BuffTwo",         Row = 2, Column = 2, Binding = "C" },
+    { Key = "Buff",            Row = 2, Column = 3, Binding = "T" },
+    { Key = "Mount",           Row = 2, Column = 4, Binding = "," },
+    { Key = "SelfRegularHeal", Row = 3, Column = 0, Binding = "A" },
+    { Key = "SelfPrimaryHeal", Row = 3, Column = 1, Binding = "S" },
+    { Key = "SelfRegen",       Row = 3, Column = 2, Binding = "D" },
+    { Key = "SelfLight",       Row = 3, Column = 3, Binding = "F" },
+    { Key = "ManaSpecial",     Row = 3, Column = 4, Binding = "G" },
+    { Key = "PetRegularHeal",  Row = 4, Column = 0, Binding = "Q" },
+    { Key = "PetPrimaryHeal",  Row = 4, Column = 1, Binding = "W" },
+    { Key = "PetRegen",        Row = 4, Column = 2, Binding = "E" },
+    { Key = "PetLightHeal",    Row = 4, Column = 3, Binding = "R" },
+    { Key = "ResetFocus",      Row = 4, Column = 4, Binding = "O" }
 }
 
 DualBoxer.ButtonFrameList_KeyPad = {
-    { Key = "Assist",      Name = "DBHButton_Assist",      Row = 0, Column = 2, Binding = "NUMPADDECIMAL" },
-    { Key = "RegularHeal", Name = "DBHButton_Regular",     Row = 1, Column = 0, Binding = "NUMPAD1" },
-    { Key = "PrimaryHeal", Name = "DBHButton_Primary",     Row = 1, Column = 1, Binding = "NUMPAD2" },
-    { Key = "FastRegen",   Name = "DBHButton_FastRegen",   Row = 1, Column = 2, Binding = "NUMPAD3" },
-    { Key = "Follow",      Name = "DBHButton_Follow",      Row = 1, Column = 3, Binding = "ENTER" },
-    { Key = "ClearDebuff", Name = "DBHButton_ClearDebuff", Row = 2, Column = 0, Binding = "NUMPAD4" },
-    { Key = "Buff",        Name = "DBHButton_Buff",        Row = 2, Column = 3, Binding = "NUMPAD6" },
-    { Key = "ResetFocus",  Name = "DBHButton_ResetFocus",  Row = 3, Column = 3, Binding = "NUMPADPLUS" }
+    { Key = "Assist",      Row = 0, Column = 2, Binding = "NUMPADDECIMAL" },
+    { Key = "RegularHeal", Row = 1, Column = 0, Binding = "NUMPAD1" },
+    { Key = "PrimaryHeal", Row = 1, Column = 1, Binding = "NUMPAD2" },
+    { Key = "FastRegen",   Row = 1, Column = 2, Binding = "NUMPAD3" },
+    { Key = "Follow",      Row = 1, Column = 3, Binding = "ENTER" },
+    { Key = "ClearDebuff", Row = 2, Column = 0, Binding = "NUMPAD4" },
+    { Key = "Buff",        Row = 2, Column = 3, Binding = "NUMPAD6" },
+    { Key = "ResetFocus",  Row = 3, Column = 3, Binding = "NUMPADPLUS" }
 }
 
 function DualBoxer:PrepareFrames()
@@ -40,23 +92,15 @@ function DualBoxer:PrepareFrames()
     DualBoxer.ButtonFrames = {}
     DualBoxer.ButtonTextures = {}
 
-    if DualBoxer_Settings.UseT9 then
-        for i, frame in ipairs(DualBoxer.ButtonFrameList_T9) do
-            if frame ~= nil then
-                DualBoxer.ButtonFrames[frame.Key] = BuildFrame(frame.Name, frame.Row, frame.Column)
-                DualBoxer:BuildFrameTexture(DualBoxer.ButtonFrames[frame.Key], frame.Key, frame.Name)
-            end
-        end
-    else
-        for i, frame in ipairs(DualBoxer.ButtonFrameList_KeyPad) do
-            if frame ~= nil then
-                DualBoxer.ButtonFrames[frame.Key] = BuildFrame(frame.Name, frame.Row, frame.Column)
-                DualBoxer:BuildFrameTexture(DualBoxer.ButtonFrames[frame.Key], frame.Key, frame.Name)
-            end
-        end
+    for key, name in pairs(DualBoxer.ButtonFrameNames) do
+        DualBoxer.DebugPrint("Preparing Frame: " .. tostring(name) .. " for Key: " .. tostring(key))
+        DualBoxer.ButtonFrames[key] = DualBoxer:BuildFrame(name)
+        DualBoxer:BuildFrameTexture(DualBoxer.ButtonFrames[key], key, name)
+
+        DualBoxer.DebugPrint("Frame: " .. tostring(key) .. " is " .. tostring(DualBoxer.ButtonFrames[key]))
     end
 
-    DualBoxer.BindingFrame = BuildFrame("DBRBindings", -1, -1, nil, nil)
+    DualBoxer.BindingFrame = DualBoxer:BuildFrame("DBRBindings")
 end
 
 function DualBoxer:BuildBaseFrame()
@@ -95,10 +139,10 @@ function DualBoxer:BuildBaseFrame()
     return rc
 end
 
-function DualBoxer:BuildFrame(name, row, column)
+function DualBoxer:BuildFrame(name)
     local buttonFrame = CreateFrame("Button", name, DualBoxer.ButtonFrameParent, "SecureActionButtonTemplate")
     buttonFrame:SetSize(32, 32)
-    buttonFrame:SetPoint("BOTTOMLEFT", column * 32, row * 32)
+    buttonFrame:SetPoint("BOTTOMLEFT", -32, -32)
     buttonFrame:RegisterForClicks("AnyDown")
     buttonFrame:EnableMouse(true)
 
@@ -122,6 +166,24 @@ function DualBoxer:ClearButtons()
     DualBoxer:ClearBindings()
 end
 
+function DualBoxer:UpdateFrames()
+    local buttonList =
+        (DualBoxer_Settings.UseT9 and DualBoxer.ButtonFrameList_T9) or
+        DualBoxer.ButtonFrameList_KeyPad
+
+
+    for key, frame in pairs(buttonList) do
+        if frame ~= nil then
+            local buttonFrame = DualBoxer.ButtonFrames[frame.Key]
+
+            if buttonFrame ~= nil then
+                buttonFrame:ClearAllPoints()
+                buttonFrame:SetPoint("BOTTOMLEFT", frame.Column * 32, frame.Row * 32)
+            end
+        end
+    end
+end
+
 function DualBoxer:FollowerButtons(masterUnit)
     print("DBR: Preparing Party Member Buttons.")
     local playerClassName, playerClassID = UnitClassBase("player")
@@ -140,6 +202,7 @@ function DualBoxer:FollowerButtons(masterUnit)
 
     print("DBR: Applying Spell List")
     DualBoxer:ApplySpellList(spellList)
+    DualBoxer:UpdateFrames()
     DualBoxer:SetBindings()
     DualBoxer.ButtonFrameParent:Show()
 end
@@ -147,16 +210,33 @@ end
 function DualBoxer:SetBindings()
     DualBoxer:ClearBindings()
 
-    if not DualBoxer_Settings.UseT9 then
-        for i, value in ipairs(DualBoxer.ButtonFrameList_KeyPad) do
-            SetOverrideBindingClick(DualBoxer.BindingFrame, false, value.Binding, value.Name, "LeftButton")
-        end
-    else
-        for i, value in ipairs(DualBoxer.ButtonFrameList_T9) do
-            SetOverrideBindingClick(DualBoxer.BindingFrame, false, value.Binding, value.Name, "LeftButton")
-        end
+    local bindingList =
+        (DualBoxer_Settings.UseT9 and DualBoxer.ButtonFrameList_T9) or
+        DualBoxer.ButtonFrameList_KeyPad
 
-        SetOverrideBinding(DualBoxer.BindingFrame, false, "NUMPADMINUS", "JUMP")
+    for i, value in ipairs(bindingList) do
+        local buttonName = DualBoxer.ButtonFrameNames[value.Key]
+
+        if buttonName ~= nil then
+            DualBoxer.DebugPrint(
+                "Setting Binding: " ..
+                tostring(value.Binding) .. " for Frame: " .. tostring(buttonName)
+            )
+
+            SetOverrideBindingClick(
+                DualBoxer.BindingFrame,
+                false,
+                value.Binding,
+                buttonName,
+                "LeftButton")
+        else
+            DualBoxer.DebugPrint("Couldn't find frame for :" .. tostring(value.Key))
+        end
+    end
+
+    SetOverrideBinding(DualBoxer.BindingFrame, false, "NUMPADMINUS", "JUMP")
+
+    if DualBoxer_Settings.UseT9 then
         SetOverrideBinding(DualBoxer.BindingFrame, false, "F1", "OPENALLBAGS")
         SetOverrideBinding(DualBoxer.BindingFrame, false, "F2", "TOGGLEQUESTLOG")
         SetOverrideBinding(DualBoxer.BindingFrame, false, "F3", "TOGGLECHARACTER0")
