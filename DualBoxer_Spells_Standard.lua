@@ -17,7 +17,7 @@ function DualBoxer:DoNothing()
     -- Do nothing.
 end
 
-function DualBoxer:ButtonDetails_FastRegen(masterUnit, playerClassID, playerLevel)
+function DualBoxer:ButtonDetails_FastRegen(masterUnit, playerClassID)
     if playerClassID == 2 then
     elseif playerClassID == 10 then
         return {
@@ -36,7 +36,7 @@ function DualBoxer:ButtonDetails_FastRegen(masterUnit, playerClassID, playerLeve
     end
 end
 
-function DualBoxer:ButtonDetails_Assist(masterUnit, playerClassID, playerLevel)
+function DualBoxer:ButtonDetails_Assist(masterUnit, playerClassID)
     if playerClassID == 10 then
         return {
             ButtonFrameName = "Assist",
@@ -50,63 +50,6 @@ function DualBoxer:ButtonDetails_Assist(masterUnit, playerClassID, playerLevel)
             Type = "spell",
             Spell = "Wrath",
             Unit = masterUnit .. "target"
-        }
-    end
-end
-
-function DualBoxer:ButtonDetails_PrimaryHeal(masterUnit, playerClassID)
-    if playerClassID == 10 then
-        -- return {
-        --     ButtonFrameName = "PrimaryHeal",
-        --     Type = "spell",
-        --     Spell = "Soothing Mist",
-        --     Unit = masterUnit
-        -- }
-    elseif playerClassID == 11 then
-        if DualBoxer.IsClassic then
-            return {
-                ButtonFrameName = "PrimaryHeal",
-                Type = "spell",
-                Spell = "Healing Touch",
-                Unit = masterUnit
-            }
-        else
-            return {
-                ButtonFrameName = "PrimaryHeal",
-                Type = "spell",
-                Spell = "Nourish",
-                Unit = masterUnit
-            }
-        end
-    end
-end
-
-function DualBoxer:ButtonDetails_Mount(playerClassID)
-    if playerClassID == 11 then
-        if DualBoxer.IsClassic then
-            return {
-                ButtonFrameName = "Mount",
-                Type = "macro",
-                MacroText = [[
-#showtooltip Swift Flight Form
-/cast [flyable,nomod, noswimming] Swift Flight Form
-/cast [swimming, nomod] Abyssal Seahorse
-/cast [noflyable,nomod, noswimming][flyable,mod:alt] Winterspring Frostsaber
-/dismount [mounted]
-]]
-            }
-        else
-            return {
-                ButtonFrameName = "Mount",
-                Type = "spell",
-                Spell = "Travel Form"
-            }
-        end
-    else
-        return {
-            ButtonFrameName = "Mount",
-            Type = "spell",
-            Spell = "Red Flying Cloud"
         }
     end
 end
@@ -132,6 +75,33 @@ function DualBoxer:ButtonDetails_RegularHeal(masterUnit, playerClassID)
                 ButtonFrameName = "RegularHeal",
                 Type = "spell",
                 Spell = "Swiftmend",
+                Unit = masterUnit
+            }
+        end
+    end
+end
+
+function DualBoxer:ButtonDetails_PrimaryHeal(masterUnit, playerClassID)
+    if playerClassID == 10 then
+        -- return {
+        --     ButtonFrameName = "PrimaryHeal",
+        --     Type = "spell",
+        --     Spell = "Soothing Mist",
+        --     Unit = masterUnit
+        -- }
+    elseif playerClassID == 11 then
+        if DualBoxer.IsClassic then
+            return {
+                ButtonFrameName = "PrimaryHeal",
+                Type = "spell",
+                Spell = "Healing Touch",
+                Unit = masterUnit
+            }
+        else
+            return {
+                ButtonFrameName = "PrimaryHeal",
+                Type = "spell",
+                Spell = "Nourish",
                 Unit = masterUnit
             }
         end
@@ -183,24 +153,62 @@ function DualBoxer:ButtonDetails_LightDirect(masterUnit, playerClassID)
     end
 end
 
-function DualBoxer:ButtonDetails_Buff(masterUnit, playerClassID)
-    local frameName = "Buff"
+function DualBoxer:ButtonDetails_Follow(masterUnit, classID)
+    return {
+        ButtonFrameName = "Follow",
+        Type = "macro",
+        MacroText = "/follow " .. masterUnit,
+        Texture = DualBoxer:ClassIDIcon(classID)
+    }
+end
 
-    if playerClassID == 2 then
+function DualBoxer:ButtonDetails_PartyHeal(masterUnit, playerClassID)
+    if playerClassID == 10 then
         return {
-            ButtonFrameName = frameName,
-            Type = "Spell",
-            Spell = "Devotion Aura",
-            Unit = "player"
-        }
-    elseif playerClassID == 11 then
-        return {
-            ButtonFrameName = frameName,
+            ButtonFrameName = "PartyHeal",
             Type = "spell",
-            Spell = "Mark of the Wild",
+            Spell = "Essence Font",
             Unit = masterUnit,
             AllUnits = true
         }
+    elseif playerClassID == 11 then
+        return {
+            ButtonFrameName = "PartyHeal",
+            Type = "spell",
+            Spell = "Wild Growth",
+            Unit = masterUnit,
+            AllUnits = true
+        }
+    end
+end
+
+function DualBoxer:ButtonDetails_ClearDebuff(masterUnit, playerClassID)
+    if playerClassID == 10 then
+        return {
+            ButtonFrameName = "ClearDebuff",
+            Type = "spell",
+            Spell = "Detox",
+            Unit = masterUnit,
+            AllUnits = true
+        }
+    elseif playerClassID == 11 then
+        if DualBoxer.IsClassic then
+            return {
+                ButtonFrameName = "ClearDebuff",
+                Type = "spell",
+                Spell = "Remove Corruption",
+                Unit = masterUnit,
+                AllUnits = true
+            }
+        else
+            return {
+                ButtonFrameName = "ClearDebuff",
+                Type = "spell",
+                Spell = "Nature's Cure",
+                Unit = masterUnit,
+                AllUnits = true
+            }
+        end
     end
 end
 
@@ -244,52 +252,53 @@ function DualBoxer:ButtonDetails_BuffTwo(masterUnit, playerClassID)
     end
 end
 
-function DualBoxer:ButtonDetails_ClearDebuff(masterUnit, playerClassID)
-    if playerClassID == 10 then
+function DualBoxer:ButtonDetails_Buff(masterUnit, playerClassID)
+    local frameName = "Buff"
+
+    if playerClassID == 2 then
         return {
-            ButtonFrameName = "ClearDebuff",
+            ButtonFrameName = frameName,
+            Type = "Spell",
+            Spell = "Devotion Aura",
+            Unit = "player"
+        }
+    elseif playerClassID == 11 then
+        return {
+            ButtonFrameName = frameName,
             Type = "spell",
-            Spell = "Detox",
+            Spell = "Mark of the Wild",
             Unit = masterUnit,
             AllUnits = true
         }
-    elseif playerClassID == 11 then
-        if DualBoxer.IsClassic then
-            return {
-                ButtonFrameName = "ClearDebuff",
-                Type = "spell",
-                Spell = "Remove Corruption",
-                Unit = masterUnit,
-                AllUnits = true
-            }
-        else
-            return {
-                ButtonFrameName = "ClearDebuff",
-                Type = "spell",
-                Spell = "Nature's Cure",
-                Unit = masterUnit,
-                AllUnits = true
-            }
-        end
     end
 end
 
-function DualBoxer:ButtonDetails_PartyHeal(masterUnit, playerClassID)
-    if playerClassID == 10 then
+function DualBoxer:ButtonDetails_Mount(playerClassID)
+    if playerClassID == 11 then
+        if DualBoxer.IsClassic then
+            return {
+                ButtonFrameName = "Mount",
+                Type = "macro",
+                MacroText = [[
+#showtooltip Swift Flight Form
+/cast [flyable,nomod, noswimming] Swift Flight Form
+/cast [swimming, nomod] Abyssal Seahorse
+/cast [noflyable,nomod, noswimming][flyable,mod:alt] Winterspring Frostsaber
+/dismount [mounted]
+]]
+            }
+        else
+            return {
+                ButtonFrameName = "Mount",
+                Type = "spell",
+                Spell = "Travel Form"
+            }
+        end
+    else
         return {
-            ButtonFrameName = "PartyHeal",
+            ButtonFrameName = "Mount",
             Type = "spell",
-            Spell = "Essence Font",
-            Unit = masterUnit,
-            AllUnits = true
-        }
-    elseif playerClassID == 11 then
-        return {
-            ButtonFrameName = "PartyHeal",
-            Type = "spell",
-            Spell = "Wild Growth",
-            Unit = masterUnit,
-            AllUnits = true
+            Spell = "Red Flying Cloud"
         }
     end
 end
@@ -297,7 +306,7 @@ end
 function DualBoxer:ButtonDetails_SelfRegularHeal(playerClassID)
     if playerClassID == 10 then
         return {
-            ButtonFrameName = "SelfRegular",
+            ButtonFrameName = "SelfRegularHeal",
             Type = "spell",
             Spell = "Renewing Mist",
             Unit = "player"
@@ -305,14 +314,14 @@ function DualBoxer:ButtonDetails_SelfRegularHeal(playerClassID)
     elseif playerClassID == 11 then
         if DualBoxer.IsClassic then
             return {
-                ButtonFrameName = "SelfRegular",
+                ButtonFrameName = "SelfRegularHeal",
                 Type = "spell",
                 Spell = "Regrowth",
                 Unit = "player"
             }
         else
             return {
-                ButtonFrameName = "SelfRegular",
+                ButtonFrameName = "SelfRegularHeal",
                 Type = "spell",
                 Spell = "Swiftmend",
                 Unit = "player"
@@ -322,24 +331,17 @@ function DualBoxer:ButtonDetails_SelfRegularHeal(playerClassID)
 end
 
 function DualBoxer:ButtonDetails_SelfPrimaryHeal(playerClassID)
-    if playerClassID == 10 then
-        -- return {
-        --     ButtonFrameName = "PrimaryHeal",
-        --     Type = "spell",
-        --     Spell = "Soothing Mist",
-        --     Unit = "player"
-        -- }
-    elseif playerClassID == 11 then
+    if playerClassID == 11 then
         if DualBoxer.IsClassic then
             return {
-                ButtonFrameName = "SelfHeal",
+                ButtonFrameName = "SelfPrimaryHeal",
                 Type = "spell",
                 Spell = "Healing Touch",
                 Unit = "player"
             }
         else
             return {
-                ButtonFrameName = "SelfHeal",
+                ButtonFrameName = "SelfPrimaryHeal",
                 Type = "spell",
                 Spell = "Nourish",
                 Unit = "player"
@@ -393,9 +395,9 @@ function DualBoxer:ButtonDetails_SelfLight(playerClassID)
     end
 end
 
-function DualBoxer:ButtonDetails_Innervate(masterUnit, playerClassID)
-    rc = {
-        ButtonFrameName = "Innervate",
+function DualBoxer:ButtonDetails_ManaSpecial(masterUnit, playerClassID)
+    local rc = {
+        ButtonFrameName = "ManaSpecial",
         Type = "spell"
     }
 
@@ -418,18 +420,18 @@ function DualBoxer:ButtonDetails_Innervate(masterUnit, playerClassID)
     return rc
 end
 
-function DualBoxer:ButtonDetails_PetRegular(masterUnit, playerClassID)
+function DualBoxer:ButtonDetails_PetRegularHeal(masterUnit, playerClassID)
     if playerClassID == 11 then
         if DualBoxer.IsClassic then
             return {
-                ButtonFrameName = "PetRegular",
+                ButtonFrameName = "PetRegularHeal",
                 Type = "spell",
                 Spell = "Regrowth",
                 Unit = masterUnit .. "pet"
             }
         else
             return {
-                ButtonFrameName = "PetRegular",
+                ButtonFrameName = "PetRegularHeal",
                 Type = "spell",
                 Spell = "Swiftmend",
                 Unit = masterUnit .. "pet"
@@ -442,14 +444,14 @@ function DualBoxer:ButtonDetails_PetHeal(masterUnit, playerClassID)
     if playerClassID == 11 then
         if DualBoxer.IsClassic then
             return {
-                ButtonFrameName = "PetHeal",
+                ButtonFrameName = "PetPrimaryHeal",
                 Type = "spell",
                 Spell = "Healing Touch",
                 Unit = masterUnit .. "pet"
             }
         else
             return {
-                ButtonFrameName = "PetHeal",
+                ButtonFrameName = "PetPrimaryHeal",
                 Type = "spell",
                 Spell = "Nourish",
                 Unit = masterUnit .. "pet"
@@ -487,13 +489,4 @@ function DualBoxer:ButtonDetails_PetLight(masterUnit, playerClassID)
             }
         end
     end
-end
-
-function DualBoxer:ButtonDetails_Follow(masterUnit, classID)
-    return {
-        ButtonFrameName = "Follow",
-        Type = "macro",
-        MacroText = "/follow " .. masterUnit,
-        Texture = DualBoxer:ClassIDIcon(classID)
-    }
 end

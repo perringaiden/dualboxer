@@ -2,7 +2,7 @@ function DualBoxer:AddInviter(rest)
     local inviter = DualBoxer:ExtractCharacterName(rest)
 
     if inviter ~= nil then
-        if not Utilities:SetContains(DualBoxer_Settings.ApprovedCharacters, inviter) then
+        if not Wolf_Utilities:SetContains(DualBoxer_Settings.ApprovedCharacters, inviter) then
             table.insert(DualBoxer_Settings.ApprovedCharacters, inviter)
             print("Added " .. inviter .. " to the approved list.")
         end
@@ -19,10 +19,10 @@ end
 -- Local Functions
 
 function DualBoxer:ExtractCharacterName(value)
-    local params = Utilities:SplitString(value)
+    local params = Wolf_Utilities:SplitString(value)
     local name = nil
 
-    if table.getn(params) > 0 then
+    if #params > 0 then
         if params[1] ~= nil then
             name = strupper(params[1]:sub(1, 1)) .. strlower(params[1]:sub(2, strlen(params[1])))
         end
@@ -35,7 +35,7 @@ function DualBoxer:UpdateLootMethod()
     if UnitIsGroupLeader("player", 1) then
         local lootMethod = C_PartyInfo.GetLootMethod()
 
-        if lootmethod ~= 0 then
+        if lootMethod ~= 0 then
             if DualBoxer:FindApprovedMemberUnit() ~= nil then
                 C_PartyInfo.SetLootMethod(0)
             end
@@ -52,7 +52,7 @@ function DualBoxer:FindApprovedMemberUnit()
         if UnitExists(unit) and UnitIsConnected(unit) then
             local characterName = UnitName(unit)
 
-            if Utilities:SetContains(DualBoxer_Settings.ApprovedCharacters, characterName, true) then
+            if Wolf_Utilities:SetContains(DualBoxer_Settings.ApprovedCharacters, characterName, true) then
                 return unit
             end
         end

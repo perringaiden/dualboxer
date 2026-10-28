@@ -1,15 +1,15 @@
-Utilities = {}
+Wolf_Utilities = {}
 
 -- SetContains
 -- Description: Returns True if the provided set contains the value.
 -- Parameters:
 -- set - The set to check.
 -- value - The value to check for.
-function Utilities:SetContains(set, value, caseInsensitive)
+function Wolf_Utilities:SetContains(set, value, caseInsensitive)
     if set ~= nil then
         for i, entry in ipairs(set) do
             if caseInsensitive == true then
-                if Utilities:CaseInsensitiveEquals(entry, value) then
+                if Wolf_Utilities:CaseInsensitiveEquals(entry, value) then
                     return true
                 end
             else
@@ -28,7 +28,7 @@ end
 -- Parameters:
 -- inputstr - The input string.
 -- sep - The separator character.
-function Utilities:SplitString(inputstr, sep)
+function Wolf_Utilities:SplitString(inputstr, sep)
     if sep == nil then
         sep = "%s"
     end
@@ -39,17 +39,17 @@ function Utilities:SplitString(inputstr, sep)
     return t
 end
 
-function Utilities:CaseInsensitiveEquals(valueA, valueB)
+function Wolf_Utilities:CaseInsensitiveEquals(valueA, valueB)
     return strlower(valueA) == strlower(valueB)
 end
 
-function Utilities:InsertInTable(tableObj, value)
+function Wolf_Utilities:InsertInTable(tableObj, value)
     if value ~= nil then
         table.insert(tableObj, value)
     end
 end
 
-function Utilities:TableToString(tableObj)
+function Wolf_Utilities:TableToString(tableObj)
     local result = "{"
 
     for i, value in ipairs(tableObj) do
@@ -59,7 +59,7 @@ function Utilities:TableToString(tableObj)
     return result
 end
 
-function Utilities:CallFunctionIfExists(func, fallback, ...)
+function Wolf_Utilities:CallFunctionIfExists(func, fallback, ...)
     if func ~= nil then
         return func(...)
     end

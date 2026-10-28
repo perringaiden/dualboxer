@@ -1,4 +1,5 @@
---[[ 
+---@diagnostic disable: duplicate-set-field
+--[[
 1	Warrior	WARRIOR	
 2	Paladin	PALADIN	
 3	Hunter	HUNTER	
@@ -13,43 +14,17 @@
 12	Demon Hunter	DEMONHUNTER	Added in 7.0.3
 13	Evoker	EVOKER	Added in 10.0.0
  ]]
-function DualBoxer:ButtonDetails_Follow(masterUnit, classID)
-    local followTemplate = [[/follow %s
-/cast [@%s] %s]]
+function DualBoxer:ButtonDetails_FastRegen(masterUnit, classID)
+    local spellID = DualBoxer:DruidFastRegenSpellID()
 
-    return {
-        ButtonFrameName = "Follow",
-        Type = "macro",
-        MacroText = string.format(followTemplate, masterUnit, masterUnit, DualBoxer:GetFastRegenSpell(classID)),
-        Texture = DualBoxer:ClassIDIcon(classID)
-    }
-end
-
-function DualBoxer:FastRegen(masterUnit, classID)
-    local spellName = DualBoxer:GetFastRegenSpell(classID)
-
-    if spellName ~= nil then
+    if spellID ~= nil then
         return {
             ButtonFrameName = "FastRegen",
             Type = "spell",
-            Spell = spellName,
+            Spell = spellID,
             Unit = masterUnit
         }
     end
-end
-
-function DualBoxer:GetFastRegenSpell(classID)
-    if classID == 2 then
-        return "Flash Heal"
-    elseif classID == 5 then
-        return "Renew"
-    elseif classID == 7 then
-        return "Healing Wave"
-    elseif classID == 11 then
-        return "Rejuvenation"
-    end
-
-    return nil
 end
 
 function DualBoxer:ButtonDetails_Assist(masterUnit, playerClassID, playerLevel)
@@ -85,13 +60,100 @@ function DualBoxer:ButtonDetails_PrimaryHeal(masterUnit, playerClassID)
     end
 end
 
+function DualBoxer:ButtonDetails_Regen(masterUnit, playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_LightDirect(masterUnit, playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_Follow(masterUnit, classID)
+    local followTemplate = [[/follow %s
+/cast [@%s] %s]]
+
+    return {
+        ButtonFrameName = "Follow",
+        Type = "macro",
+        MacroText = string.format(followTemplate, masterUnit, masterUnit, DualBoxer:GetFastRegenSpell(classID)),
+        Texture = DualBoxer:ClassIDIcon(classID)
+    }
+end
+
+function DualBoxer:ButtonDetails_PartyHeal(masterUnit, playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_ClearDebuff(masterUnit, playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_BuffTwo(masterUnit, playerClassID)
+
+end
+
 function DualBoxer:ButtonDetails_Buff(masterUnit, playerClassID)
     if playerClassID == 11 then
         return {
             ButtonFrameName = "Buff",
-            Type = "macro",
-            MacroText = "/cast [@player,modifier:alt][@" .. masterUnit .. "] Mark of the Wild",
-            Texture = 136078
+            Type = "spell",
+            Spell = "Mark of the Wild",
+            Unit = masterUnit,
+            AllUnits = true
         }
     end
+end
+
+function DualBoxer:ButtonDetails_Mount(playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_SelfRegularHeal(playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_SelfPrimaryHeal(playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_SelfRegen(playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_SelfLight(playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_ManaSpecial(masterUnit, playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_PetRegularHeal(masterUnit, playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_PetHeal(masterUnit, playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_PetRegen(masterUnit, playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_PetLightHeal(masterUnit, playerClassID)
+
+end
+
+function DualBoxer:GetFastRegenSpell(classID)
+    if classID == 2 then
+        return "Flash Heal"
+    elseif classID == 5 then
+        return "Renew"
+    elseif classID == 7 then
+        return "Healing Wave"
+    elseif classID == 11 then
+        return "Rejuvenation"
+    end
+
+    return nil
 end
