@@ -1,5 +1,7 @@
 ---@diagnostic disable-next-line: create-global
 DualBoxer = {}
+DualBoxer.MessagePrefix = "DualBoxer"
+
 
 SLASH_DBRCMD1, SLASH_DBRCMD2 = "/dbr", "/dualboxer"
 
@@ -45,6 +47,8 @@ function DualBoxer.CommandHandler(msg, editBox)
         DualBoxer_Settings.Debug = not DualBoxer_Settings.Debug
 
         print("Debug is: " .. tostring(DualBoxer_Settings.Debug))
+    elseif strlower(command) == "testmessage" then
+        DualBoxer:SendMessage(rest)
     end
 end
 
@@ -68,19 +72,23 @@ function DualBoxer.CreateEventFrame()
     dualBoxerWindow:RegisterEvent("GOSSIP_CONFIRM")
     dualBoxerWindow:RegisterEvent("QUEST_FINISHED")
     dualBoxerWindow:RegisterEvent("QUEST_ACCEPTED")
+    dualBoxerWindow:RegisterEvent("QUEST_COMPLETE")
     dualBoxerWindow:RegisterEvent("QUEST_LOG_UPDATE")
     dualBoxerWindow:RegisterEvent("QUEST_PROGRESS")
     dualBoxerWindow:RegisterEvent("QUEST_DETAIL")
     dualBoxerWindow:RegisterEvent("QUEST_ITEM_UPDATE")
+    dualBoxerWindow:RegisterEvent("QUEST_WATCH_UPDATE")
+    dualBoxerWindow:RegisterEvent("CHAT_MSG_ADDON")
     dualBoxerWindow:Hide()
 
     DualBoxer.Window = dualBoxerWindow
 end
 
-function DualBoxer.OnEvent(self, event, sender, ...)
+function DualBoxer.OnEvent(self, event, ...)
     if DualBoxer.Disabled ~= true then
         if event == "PLAYER_ENTERING_WORLD" then
             print("Player Entering World")
+            DualBoxer:CommsInit()
             DualBoxer:EnsureSettings()
             DualBoxer:PrepareFrames()
             DualBoxer:UpdateLootMethod()
@@ -88,6 +96,8 @@ function DualBoxer.OnEvent(self, event, sender, ...)
             DualBoxer:UpdateUI()
         elseif event == "PARTY_INVITE_REQUEST" then
             local acceptInvite = false
+            local sender = ...
+
 
             if Wolf_Utilities:SetContains(DualBoxer_Settings.ApprovedCharacters, sender) then
                 AcceptGroup()
@@ -98,11 +108,23 @@ function DualBoxer.OnEvent(self, event, sender, ...)
             DualBoxer:UpdateLootMethod()
             DualBoxer:UpdateUI()
         elseif event == "QUEST_ACCEPT_CONFIRM" then
+            local sender = ...
+
             DualBoxer.DebugPrint("Quest Accept Confirm:" .. sender)
             if Wolf_Utilities:SetContains(DualBoxer_Settings.ApprovedCharacters, sender) then
                 ConfirmAcceptQuest()
                 StaticPopup_Hide("QUEST_ACCEPT")
             end
+        elseif event == "CHAT_MSG_ADDON" then
+            local receivedPrefix, text, channel, sender, target, zoneChannelID, localID, name, instanceID = ...
+
+            if receivedPrefix == DualBoxer.MessagePrefix then
+                DualBoxer.DebugPrint(format("Sender: %s Channel: %s Text: '%s'", sender, channel, text))
+            end
+        elseif event == "QUEST_WATCH_UPDATE" then
+            local questID = ...
+
+            DualBoxer.DebugPrint(format("Quest Update: %s", questID))
         end
     end
 end

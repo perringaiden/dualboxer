@@ -5,6 +5,7 @@
 ## Author: Perringaiden
 ## SavedVariablesPerCharacter: DualBoxer_Settings
 DualBoxer_Core.lua
+DualBoxer_Comms.lua
 DualBoxer_Debug.lua
 DualBoxer_Party.lua
 DualBoxer_Buttons.lua

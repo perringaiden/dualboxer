@@ -16,7 +16,8 @@
     ],
     "Lua.diagnostics.globals": [
         "SlashCmdList",
-        "StaticPopup_Hide"
+        "StaticPopup_Hide",
+        "ADD"
     ],
     "Lua.type.weakUnionCheck": true,
     "Lua.diagnostics.disable": [
