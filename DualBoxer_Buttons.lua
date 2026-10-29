@@ -310,12 +310,12 @@ end
 function DualBoxer:GenerateSpellList(playerClassID, playerLevel, masterUnit, masterLevel, masterClassID)
     local list = {}
 
-    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_Assist(masterUnit, playerClassID, playerLevel)) -- V
-    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_RegularHeal(masterUnit, playerClassID))         -- K
-    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_Follow(masterUnit, masterClassID))              -- .
-    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_PrimaryHeal(masterUnit, playerClassID))         -- N
-    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_Buff(masterUnit, playerClassID))                -- T
-    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_FastRegen(masterUnit, playerClassID))           -- H
+    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_Assist(masterUnit, playerClassID))      -- V
+    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_RegularHeal(masterUnit, playerClassID)) -- K
+    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_Follow(masterUnit, masterClassID))      -- .
+    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_PrimaryHeal(masterUnit, playerClassID)) -- N
+    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_Buff(masterUnit, playerClassID))        -- T
+    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_FastRegen(masterUnit, playerClassID))   -- H
 
     if DualBoxer_Settings.UseT9 then
         Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_Regen(masterUnit, playerClassID))       -- M
@@ -348,4 +348,216 @@ function DualBoxer:ButtonDetails_ResetFocus(masterUnit, masterUnitClassID)
         MacroText = "/target " .. UnitName(masterUnit) .. "\n/focus",
         Texture = DualBoxer:ClassIDIcon(masterUnitClassID)
     }
+end
+
+function DualBoxer:ButtonDetails_FastRegen(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "FastRegen",
+        Unit = masterUnit
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_Assist(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "Assist",
+        Unit = masterUnit .. "target"
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_RegularHeal(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "RegularHeal",
+        Unit = masterUnit
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_PrimaryHeal(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "PrimaryHeal",
+        Unit = masterUnit
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_Regen(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "Regen",
+        Unit = masterUnit
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_LightDirect(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "LightDirect",
+        Unit = masterUnit
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_Follow(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "Follow",
+        Unit = masterUnit
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_PartyHeal(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "PartyHeal",
+        Unit = masterUnit
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_ClearDebuff(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "ClearDebuff",
+        Unit = masterUnit,
+        AllUnits = true
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_BuffTwo(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "BuffTwo",
+        Unit = masterUnit,
+        AllUnits = true
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_Buff(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "Buff",
+        Unit = masterUnit,
+        AllUnits = true
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_Mount(playerClassID)
+
+end
+
+function DualBoxer:ButtonDetails_SelfRegularHeal(playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "SelfRegularHeal",
+        Unit = "player"
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_SelfPrimaryHeal(playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "SelfPrimaryHeal",
+        Unit = "player"
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_SelfRegen(playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "SelfRegen",
+        Unit = "player"
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_SelfLight(playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "SelfLight",
+        Unit = "player"
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_ManaSpecial(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "ManaSpecial",
+        Unit = masterUnit
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_PetRegularHeal(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "PetRegularHeal",
+        Unit = masterUnit .. "pet"
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_PetPrimaryHeal(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "PetPrimaryHeal",
+        Unit = masterUnit .. "pet"
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_PetRegen(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "PetRegen",
+        Unit = masterUnit .. "pet"
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:ButtonDetails_PetLightHeal(masterUnit, playerClassID)
+    local buttonDetail = {
+        ButtonFrameName = "PetLightHeal",
+        Unit = masterUnit .. "pet"
+    }
+
+    return DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+end
+
+function DualBoxer:SetButtonDetails(buttonDetail, playerClassID)
+    if buttonDetail ~= nil then
+        --[[
+1	Warrior	WARRIOR	
+2	Paladin	PALADIN	
+3	Hunter	HUNTER	
+4	Rogue	ROGUE	
+5	Priest	PRIEST	
+6	Death Knight	DEATHKNIGHT	Added in 3.0.2
+7	Shaman	SHAMAN	
+8	Mage	MAGE	
+9	Warlock	WARLOCK	
+10	Monk	MONK	Added in 5.0.4
+11	Druid	DRUID	
+12	Demon Hunter	DEMONHUNTER	Added in 7.0.3
+13	Evoker	EVOKER	Added in 10.0.0
+ ]]
+        if playerClassID == 11 then
+            return DualBoxer:SetDruidButtonDetails(buttonDetail)
+        end
+    end
+
+    return nil
 end

@@ -8,5 +8,5 @@ DualBoxer_Core.lua
 DualBoxer_Debug.lua
 DualBoxer_Party.lua
 DualBoxer_Buttons.lua
-DualBoxer_Spells_Standard.lua
+DualBoxer_Druid_Standard.lua
 Utilities.lua
