@@ -55,7 +55,7 @@ function DualBoxer:SetDruidButtonDetails(buttonDetail)
             return buttonDetail
         elseif buttonDetail.ButtonFrameName == "BuffTwo" then
             buttonDetail.Type = "spell"
-            buttonDetail.Spell = "Thorns"
+            buttonDetail.Spell = "Ironbark"
 
             return buttonDetail
         elseif buttonDetail.ButtonFrameName == "Buff" then

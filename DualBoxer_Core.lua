@@ -69,6 +69,7 @@ function DualBoxer.CreateEventFrame()
     dualBoxerWindow:RegisterEvent("GOSSIP_CLOSED")
     dualBoxerWindow:RegisterEvent("QUEST_GREETING")
     dualBoxerWindow:RegisterEvent("QUEST_ACCEPT_CONFIRM")
+    dualBoxerWindow:RegisterEvent("QUEST_DETAIL")
     dualBoxerWindow:RegisterEvent("GOSSIP_CONFIRM")
     dualBoxerWindow:RegisterEvent("QUEST_FINISHED")
     dualBoxerWindow:RegisterEvent("QUEST_ACCEPTED")
@@ -115,16 +116,53 @@ function DualBoxer.OnEvent(self, event, ...)
                 ConfirmAcceptQuest()
                 StaticPopup_Hide("QUEST_ACCEPT")
             end
+        elseif event == "QUEST_ACCEPTED" then
+            local questID = ...
+
+            DualBoxer:QuestAccepted(questID)
+        elseif event == "QUEST_DETAIL" then
+            local questGiverGUID = UnitGUID("questnpc")
+
+            if canaccessvalue(DualBoxer.MasterGUID) and
+                canaccessvalue(questGiverGUID) and
+                questGiverGUID == DualBoxer.MasterGUID then
+                AcceptQuest()
+            end
         elseif event == "CHAT_MSG_ADDON" then
             local receivedPrefix, text, channel, sender, target, zoneChannelID, localID, name, instanceID = ...
 
             if receivedPrefix == DualBoxer.MessagePrefix then
+                local stringOpener = string.sub(text, 1, 1)
                 DualBoxer.DebugPrint(format("Sender: %s Channel: %s Text: '%s'", sender, channel, text))
+
+                if stringOpener == "{" then
+                    local msgDetail = loadstring("return " .. text)()
+
+                    if msgDetail ~= nil then
+                        DualBoxer.DebugPrint(format("Quest MessageType: %s", msgDetail.messageType))
+
+                        if msgDetail.messageType == "QUEST_UPDATE" then
+                            DualBoxer:ProcessQuesUpdateMessage(sender, msgDetail)
+                        else
+                            for key, value in pairs(msgDetail) do
+                                DualBoxer.DebugPrint(format("%s : %s", key, value))
+                            end
+                        end
+                    end
+                else
+                    DualBoxer.DebugPrint(format("First Letter: %s", stringOpener))
+                end
             end
         elseif event == "QUEST_WATCH_UPDATE" then
             local questID = ...
 
             DualBoxer.DebugPrint(format("Quest Update: %s", questID))
+
+            C_Timer.After(0.5,
+                function()
+                    DualBoxer:QuestUpdate(questID)
+                end
+            )
         end
     end
 end
@@ -159,12 +197,15 @@ function DualBoxer:UpdateUI()
         if masterUnit ~= nil then
             print("Preparing for Master:" .. tostring(masterUnit) .. " (" .. UnitName(masterUnit) .. ")")
             DualBoxer:FollowerButtons(masterUnit)
+            DualBoxer.MasterGUID = UnitGUID(masterUnit)
         elseif DualBoxer.Focus == true then
             print("Preparing for Focus")
             DualBoxer:FollowerButtons("focus")
+            DualBoxer.MasterGUID = UnitGUID("focus")
         else
             print("Clearing buttons.")
             DualBoxer:ClearButtons()
+            DualBoxer.MasterGUID = nil
         end
     else
         DualBoxer:ClearButtons()
