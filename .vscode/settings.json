@@ -18,7 +18,11 @@
         "SlashCmdList",
         "StaticPopup_Hide",
         "ADD",
-        "ID"
+        "ID",
+        "SelectQuestLogEntry",
+        "GetQuestLogPushable",
+        "GetQuestLogIndexByID",
+        "QuestEventListener"
     ],
     "Lua.type.weakUnionCheck": true,
     "Lua.diagnostics.disable": [

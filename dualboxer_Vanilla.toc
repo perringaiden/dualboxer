@@ -10,5 +10,6 @@ DualBoxer_Comms.lua
 DualBoxer_Buttons.lua
 DualBoxer_Party.lua
 DualBoxer_Quests.lua
-DualBoxer_Druid_Classic.lua
+DualBoxer_Quests_Classic.lua
+DualBoxer_Druid_Vanilla.lua
 Utilities.lua

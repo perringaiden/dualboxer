@@ -21,7 +21,6 @@ DualBoxer.ButtonFrameList = {
     { Key = "PetRegen",        Name = "DBHButton_PetRegen" },
     { Key = "PetLightHeal",    Name = "DBHButton_PetLight" },
     { Key = "ResetFocus",      Name = "DBHButton_ResetFocus" }
-
 }
 
 DualBoxer.ButtonFrameNames = {
@@ -107,7 +106,7 @@ function DualBoxer:BuildBaseFrame()
     local rc = CreateFrame("Frame", "DBRButton_Frame", UIParent, "SecureFrameTemplate")
 
     rc:SetPoint("TOPLEFT", DualBoxer_Settings.XCoord, DualBoxer_Settings.YCoord)
-    rc:SetSize(32 * 5, 32 * 5)
+    rc:SetSize(32 * 6, 32 * 6)
     rc:SetMovable(true)
     rc:RegisterForDrag("LeftButton")
 
@@ -243,6 +242,19 @@ function DualBoxer:SetBindings()
         SetOverrideBinding(DualBoxer.BindingFrame, false, "F4", "TOGGLEPROFESSIONBOOK")
         SetOverrideBinding(DualBoxer.BindingFrame, false, "F5", "TOGGLECHARACTER2")
         SetOverrideBinding(DualBoxer.BindingFrame, false, "F6", "TOGGLETALENTS")
+
+        SetOverrideBindingClick(DualBoxer.BindingFrame, false, "1", "MultiBarRightButton1")
+        SetOverrideBindingClick(DualBoxer.BindingFrame, false, "2", "MultiBarRightButton2")
+        SetOverrideBindingClick(DualBoxer.BindingFrame, false, "3", "MultiBarRightButton3")
+        SetOverrideBindingClick(DualBoxer.BindingFrame, false, "4", "MultiBarRightButton4")
+        SetOverrideBindingClick(DualBoxer.BindingFrame, false, "5", "MultiBarRightButton5")
+        SetOverrideBindingClick(DualBoxer.BindingFrame, false, "6", "MultiBarRightButton6")
+        SetOverrideBindingClick(DualBoxer.BindingFrame, false, "SHIFT-1", "MultiBarRightButton7")
+        SetOverrideBindingClick(DualBoxer.BindingFrame, false, "SHIFT-2", "MultiBarRightButton8")
+        SetOverrideBindingClick(DualBoxer.BindingFrame, false, "SHIFT-3", "MultiBarRightButton9")
+        SetOverrideBindingClick(DualBoxer.BindingFrame, false, "SHIFT-4", "MultiBarRightButton10")
+        SetOverrideBindingClick(DualBoxer.BindingFrame, false, "SHIFT-5", "MultiBarRightButton11")
+        SetOverrideBindingClick(DualBoxer.BindingFrame, false, "SHIFT-6", "MultiBarRightButton12")
     end
 end
 
@@ -293,6 +305,22 @@ function DualBoxer:ApplySpellList(list)
                         end
 
                         textureFile = C_Spell.GetSpellTexture(value.Spell)
+                    elseif value.Type == "click" then
+                        DualBoxer.DebugPrint(format("Setting Frame %s to relay for %s", value.ButtonFrameName,
+                            value.ClickButton))
+
+                        buttonFrame:SetAttribute("clickbutton", _G[value.ClickButton])
+
+
+                        DualBoxer.DebugPrint(format("Setting Frame %s to shift-relay for %s", value.ButtonFrameName,
+                            value.ShiftClickButton))
+
+                        buttonFrame:SetAttribute("shift-type", "click")
+                        buttonFrame:SetAttribute("shift-clickbutton", _G[value.ShiftClickButton])
+
+                        if value.Texture ~= nil then
+                            textureFile = value.Texture
+                        end
                     end
 
                     DualBoxer.ButtonTextures[value.ButtonFrameName]:SetTexture(textureFile)

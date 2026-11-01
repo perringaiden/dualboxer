@@ -1,0 +1,15 @@
+## Interface: 16001
+## Title: Dual Boxer
+## Version: 0.0.1
+## DefaultState: Enabled
+## Author: Perringaiden
+## SavedVariablesPerCharacter: DualBoxer_Settings
+DualBoxer_Core.lua
+DualBoxer_Debug.lua
+DualBoxer_Comms.lua
+DualBoxer_Buttons.lua
+DualBoxer_Party.lua
+DualBoxer_Quests.lua
+DualBoxer_Quests_Mainline.lua
+DualBoxer_Druid_Forever.lua
+Utilities.lua

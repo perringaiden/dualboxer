@@ -18,7 +18,7 @@ function DualBoxer:SetDruidButtonDetails(buttonDetail)
             return buttonDetail
         elseif buttonDetail.ButtonFrameName == "PrimaryHeal" then
             buttonDetail.Type = "spell"
-            buttonDetail.Spell = "Healing Touch"
+            buttonDetail.Spell = "Nourish"
 
             return buttonDetail
         elseif buttonDetail.ButtonFrameName == "Regen" then
@@ -28,7 +28,7 @@ function DualBoxer:SetDruidButtonDetails(buttonDetail)
             return buttonDetail
         elseif buttonDetail.ButtonFrameName == "LightDirect" then
             buttonDetail.Type = "spell"
-            buttonDetail.Spell = "Nourish"
+            buttonDetail.Spell = "Regrowth"
 
             return buttonDetail
         elseif buttonDetail.ButtonFrameName == "Follow" then

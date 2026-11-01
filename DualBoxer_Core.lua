@@ -1,6 +1,7 @@
 ---@diagnostic disable-next-line: create-global
 DualBoxer = {}
 DualBoxer.MessagePrefix = "DualBoxer"
+DualBoxer.QuestsWatched = {}
 
 
 SLASH_DBRCMD1, SLASH_DBRCMD2 = "/dbr", "/dualboxer"
@@ -76,7 +77,6 @@ function DualBoxer.CreateEventFrame()
     dualBoxerWindow:RegisterEvent("QUEST_COMPLETE")
     dualBoxerWindow:RegisterEvent("QUEST_LOG_UPDATE")
     dualBoxerWindow:RegisterEvent("QUEST_PROGRESS")
-    dualBoxerWindow:RegisterEvent("QUEST_DETAIL")
     dualBoxerWindow:RegisterEvent("QUEST_ITEM_UPDATE")
     dualBoxerWindow:RegisterEvent("QUEST_WATCH_UPDATE")
     dualBoxerWindow:RegisterEvent("CHAT_MSG_ADDON")
@@ -87,6 +87,8 @@ end
 
 function DualBoxer.OnEvent(self, event, ...)
     if DualBoxer.Disabled ~= true then
+        local questUpdateRequestID = 0
+
         if event == "PLAYER_ENTERING_WORLD" then
             print("Player Entering World")
             DualBoxer:CommsInit()
@@ -158,11 +160,13 @@ function DualBoxer.OnEvent(self, event, ...)
 
             DualBoxer.DebugPrint(format("Quest Update: %s", questID))
 
-            C_Timer.After(0.5,
-                function()
-                    DualBoxer:QuestUpdate(questID)
-                end
-            )
+            DualBoxer:QuestWatchUpdate(questID)
+        elseif event == "QUEST_LOG_UPDATE" then
+            local questID = ...
+
+            DualBoxer.DebugPrint("Quest Log Updated")
+
+            DualBoxer:QuestLogUpdate()
         end
     end
 end

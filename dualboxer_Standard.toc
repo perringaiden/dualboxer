@@ -6,7 +6,10 @@
 ## SavedVariablesPerCharacter: DualBoxer_Settings
 DualBoxer_Core.lua
 DualBoxer_Debug.lua
+DualBoxer_Comms.lua
 DualBoxer_Party.lua
 DualBoxer_Buttons.lua
 DualBoxer_Druid_Standard.lua
+DualBoxer_Quests.lua
+DualBoxer_Quests_Mainline.lua
 Utilities.lua
