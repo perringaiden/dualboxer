@@ -283,11 +283,17 @@ function DualBoxer:ApplySpellList(list)
                     buttonFrame:SetAttribute("type", value.Type)
 
                     if value.Type == "macro" then
+                        DualBoxer.DebugPrint(
+                            "Setting Macro: " ..
+                            tostring(value.MacroText) ..
+                            " on Frame: " ..
+                            tostring(value.ButtonFrameName)
+                        )
+
                         buttonFrame:SetAttribute("macroText", value.MacroText)
                         if value.Texture ~= nil then
                             textureFile = value.Texture
                         end
-                        print(value.MacroText)
                     elseif value.Type == "spell" then
                         DualBoxer.DebugPrint(
                             "Setting Spell: " ..
@@ -340,7 +346,7 @@ function DualBoxer:GenerateSpellList(playerClassID, playerLevel, masterUnit, mas
 
     Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_Assist(masterUnit, playerClassID))      -- V
     Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_RegularHeal(masterUnit, playerClassID)) -- K
-    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_Follow(masterUnit, masterClassID))      -- .
+    Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_Follow(masterUnit, playerClassID))      -- .
     Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_PrimaryHeal(masterUnit, playerClassID)) -- N
     Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_Buff(masterUnit, playerClassID))        -- T
     Wolf_Utilities:InsertInTable(list, DualBoxer:ButtonDetails_FastRegen(masterUnit, playerClassID))   -- H

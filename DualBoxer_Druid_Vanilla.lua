@@ -31,6 +31,18 @@ function DualBoxer:SetDruidButtonDetails(buttonDetail)
 
             return buttonDetail
         elseif buttonDetail.ButtonFrameName == "Follow" then
+            local followUnitClassName, followUnitClassID = UnitClassBase(buttonDetail.Unit)
+
+            DualBoxer.DebugPrint(
+                "Setting Follow Macro for Unit: " ..
+                tostring(buttonDetail.Unit) ..
+                "(" ..
+                tostring(followUnitClassName) ..
+                ")" ..
+                " on Frame: " ..
+                tostring(buttonDetail.ButtonFrameName)
+            )
+
             buttonDetail.Type = "macro"
 
             buttonDetail.MacroText = string.format(
@@ -39,7 +51,7 @@ function DualBoxer:SetDruidButtonDetails(buttonDetail)
                 buttonDetail.Unit,
                 "Rejuvenation")
 
-            buttonDetail.Texture = DualBoxer:ClassIDIcon(11)
+            buttonDetail.Texture = DualBoxer:ClassIDIcon(followUnitClassID)
 
             return buttonDetail
         elseif buttonDetail.ButtonFrameName == "PartyHeal" then

@@ -34,6 +34,12 @@ function DualBoxer:ProcessQuesUpdateMessage(sender, message)
             format("%s completed '%s'", sender, message.name),
             "ff00ff00")
         )
+
+        local willPlay = PlaySound(6199, "SFX", false)
+
+        if not willPlay then
+            print("Failed to play sound.")
+        end
     else
         print(format("Unknown Quest Message from %s : %s", sender, Wolf_Utilities:TableToString(message)))
     end
