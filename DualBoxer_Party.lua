@@ -25,7 +25,12 @@ function DualBoxer:ExtractCharacterName(value)
     local name = nil
 
     if #params > 0 then
-        if params[1] ~= nil then
+        if params[1] ~= nil and params[2] ~= nil then
+            local firstName = strupper(params[1]:sub(1, 1)) .. strlower(params[1]:sub(2, strlen(params[1])))
+            local surName = strupper(params[2]:sub(1, 1)) .. strlower(params[2]:sub(2, strlen(params[2])))
+
+            name = firstName .. " " .. surName
+        else
             name = strupper(params[1]:sub(1, 1)) .. strlower(params[1]:sub(2, strlen(params[1])))
         end
     end

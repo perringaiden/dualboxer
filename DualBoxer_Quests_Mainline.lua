@@ -35,7 +35,7 @@ function DualBoxer:PushQuest(questID)
             "ffff0000")
         )
 
-        local willPlay = PlaySound(29055, "SFX", false)
+        local willPlay = PlaySound(7195, "SFX", false)
 
         if not willPlay then
             print("Failed to play sound.")

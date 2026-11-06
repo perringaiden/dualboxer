@@ -54,11 +54,7 @@ function DualBoxer:SetDruidButtonDetails(buttonDetail)
 
             buttonDetail.Type = "macro"
 
-            buttonDetail.MacroText = string.format(
-                "/follow %s\n/cast [@%s,nomounted,noform] %s",
-                buttonDetail.Unit,
-                buttonDetail.Unit,
-                "Rejuvenation")
+            buttonDetail.MacroText = string.format("/follow %s", buttonDetail.Unit)
 
             if canaccessvalue(followUnitClassID) then
                 buttonDetail.Texture = DualBoxer:ClassIDIcon(followUnitClassID)
